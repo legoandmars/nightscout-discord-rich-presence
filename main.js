@@ -1,4 +1,12 @@
-const client = require('discord-rich-presence')('523786960947380245');
+//DOUBLE CHECK dependencies are installed.
+var xmlReq = false;
+var client;
+try{
+	xmlReq = require("xmlhttprequest");
+	client = require('discord-rich-presence')('523786960947380245');
+}catch(error){
+	console.log("Dependencies not found! Make sure to run installDependencies.bat");
+};
 var siteUrl = "https://isaacscout.herokuapp.com";
 var mainBg;
 var displayUnits = "mgdl"; //valid options are mgdl and mmol.
@@ -115,7 +123,10 @@ function manipulateURL(urlObj){
 function webRequest(callbackFunc){
 	//check that site url is valid
     var siteUrlBase = manipulateURL(siteUrl);
-	var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+    if(xmlReq == false){
+    	return;
+    }
+	var XMLHttpRequest = xmlReq.XMLHttpRequest;
 	var xhr = new XMLHttpRequest();
 	xhr.open("GET", siteUrlBase, true);
 
