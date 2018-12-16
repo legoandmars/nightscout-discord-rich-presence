@@ -1,0 +1,7 @@
+{
+	"siteUrl":"YOURSITEHERE",
+	"displayNightscoutSite" : false,
+	"lowValue": "80",
+	"highValue": "280",
+	"units": "mgdl"
+}
