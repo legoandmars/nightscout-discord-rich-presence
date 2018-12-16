@@ -7,15 +7,15 @@ try{
 }catch(error){
 	console.log("Dependencies not found! Make sure to run installDependencies.bat");
 };
-var siteUrl = "https://isaacscout.herokuapp.com";
-var mainBg;
+var mainBg; //for seeing if the bg has changed
 var displayUnits = "mgdl"; //valid options are mgdl and mmol.
+var requestSeconds = 15;
 config = require('./config.json');
 //config values
 var lowValue = Number(config.lowValue) || 80;
 var highValue = Number(config.highValue) || 180;
 var displayNightscoutSite = config.displayNightscoutSite || false;
-
+var siteUrl = config.siteUrl;
 //conversion functions for mgdl and mmol
 
 function unitToEnglish(){
@@ -120,7 +120,11 @@ function manipulateURL(urlObj){
   return siteUrlBase;
 }
 
-function webRequest(callbackFunc){
+function webError(){
+	console.log("ERROR: Invalid Site URL! Please check config.json.");
+};
+
+function webRequest(){
 	//check that site url is valid
     var siteUrlBase = manipulateURL(siteUrl);
     if(xmlReq == false){
@@ -144,15 +148,16 @@ function webRequest(callbackFunc){
 	    }
 	    // we are done. find a way to callback after all the data, too.
 	  } else {
-	    webError();
+	  	//other stuff
+	  	webError();
 	  }
 	}
 	};
 	xhr.onerror = function (e) {
-		//console.error(xhr.statusText);
+	  	webError();
 	};
 	xhr.send(null);
 }
 webRequest();
-setInterval(webRequest, 15 * 60 * 1000); //make a web request every 15 seconds
+setInterval(webRequest, requestSeconds * 1000); //make a web request every 15 seconds
 
