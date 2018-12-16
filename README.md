@@ -1,3 +1,4 @@
+# Setup
 To set everything up, go into config.json and change a couple variables:
 
 Replace "YOURSITEHERE" with the link to your nightscout site. It should look something like this: "yournightscout.herokuapp.com".
