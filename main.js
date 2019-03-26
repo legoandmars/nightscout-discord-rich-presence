@@ -1,6 +1,7 @@
 //DOUBLE CHECK dependencies are installed.
 var xmlReq = false;
 var client;
+
 try{
 	xmlReq = require("xmlhttprequest");
 	client = require('discord-rich-presence')('523786960947380245');
@@ -44,9 +45,48 @@ function mmoltoMGDL(mmolVal){
   return (tempMgdlFinal);
 }
 
+//arrow functions
+
+function arrowValues(direction) {
+    var exportString = "";
+    switch (direction) {
+        case "NONE":
+            exportString = ""
+            break;
+        case "DOUBLEUP":
+            exportString = "↑↑"
+            break;
+        case "SINGLEUP":
+            exportString = "↑"
+            break;
+        case "FORTYFIVEUP":
+            exportString = "↗"
+            break;
+        case "FLAT":
+            exportString = "→"
+            break;
+        case "FORTYFIVEDOWN":
+            exportString = "↘"
+            break;
+        case "SINGLEDOWN":
+            exportString = "↓"
+            break;
+        case "DOUBLEDOWN":
+            exportString = "↓↓"
+            break;
+        case "NOT COMPUTABLE":
+            exportString = ""
+            break;
+        case "RATE OUT OF RANGE":
+            exportString = ""
+            break;
+    }
+    return exportString;
+}
+
 //main functions
 
-function setPresence(bgValue){
+function setPresence(bgValue,arrowString){
 	//set vars
 	var smallImage = false;
 	//check for mmol or mgdl
@@ -72,26 +112,27 @@ function setPresence(bgValue){
 		}
 	}
 	//if display nightscout site is true, make sure to display it
-	var detailText = "Nightscout";
+	var detailText = "Blood Sugar:";
 	if(displayNightscoutSite == true){
 		detailText = siteUrl;
 	}
+	var stateString = bgValue+unitToEnglish()+" ("+arrowString+")";
 	if(smallImage == false){
 		//no, 
 		client.updatePresence({
 		  details: detailText,
-		  state: "Blood Sugar: "+bgValue+unitToEnglish(),
+		  state: stateString,
 		  largeImageKey: 'nightscout-logo',
-		  largeImageText:"Blood Sugar: "+bgValue+unitToEnglish(),
+		  largeImageText: stateString,
 		  //smallImageKey: 'highimage',
 		  instance: true,
 		});
 	}else{
 		client.updatePresence({
 		  details: detailText,
-		  state: "Blood Sugar: "+bgValue+unitToEnglish(),
+		  state: stateString,
 		  largeImageKey: 'nightscout-logo',
-		  largeImageText:"Blood Sugar: "+bgValue+unitToEnglish(),
+		  largeImageText: stateString,
 		  smallImageKey: smallImage+"image",
 		  smallImageText: smallImage.toUpperCase()+" GLUCOSE ALERT",
 		  instance: true,
@@ -139,12 +180,15 @@ function webRequest(){
 	  if (xhr.status === 200) {
 	    //everything is done. now we can check if it's changed, and set the presence accordingly.
 	    var currentBloodGlucose = JSON.parse(xhr.responseText)[0]["sgv"]; //sgv is the blood sugar string
+	    var direction = JSON.parse(xhr.responseText)[0]["direction"];
+	    var arrowString = arrowValues(direction.toUpperCase());
+
 	    if(mainBg==currentBloodGlucose){
 	    	//already set correctly.	
 	    }else{
 	    	//now we have a new data point, push an update.
 	    	mainBg = currentBloodGlucose;
-			setPresence(currentBloodGlucose);
+			setPresence(currentBloodGlucose,arrowString);
 	    }
 	    // we are done. find a way to callback after all the data, too.
 	  } else {
@@ -160,4 +204,3 @@ function webRequest(){
 }
 webRequest();
 setInterval(webRequest, requestSeconds * 1000); //make a web request every 15 seconds
-
