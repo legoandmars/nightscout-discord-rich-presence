@@ -13,3 +13,4 @@ export const ARROW_RATE_OUT_OF_RANGE = ''
 // Units
 export const UNIT_MGDL = 'mg/dL'
 export const UNIT_MMOL = 'mmol/L'
+export const MULTIPLIER_MMOL = 18.016
