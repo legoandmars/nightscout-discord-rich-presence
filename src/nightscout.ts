@@ -43,6 +43,8 @@ export const fetchInfo = async (baseURL: string) => {
   } catch (err) {
     log.error('Could not contact Nightscout server!')
     log.error('Please check `siteUrl` in your config.', 0)
+
+    throw err
   }
 }
 
