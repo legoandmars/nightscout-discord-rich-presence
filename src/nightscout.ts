@@ -12,6 +12,10 @@ import {
   ARROW_SINGLE_DOWN,
   ARROW_SINGLE_UP,
   MULTIPLIER_MMOL,
+  RPC_IMG_HIGH,
+  RPC_IMG_LOW,
+  RPC_STR_HIGH_ALERT,
+  RPC_STR_LOW_ALERT,
   UNIT_MGDL,
   UNIT_MMOL,
 } from './constants'
@@ -81,3 +85,47 @@ export const directionArrow = (direction: string) => {
 
 export const humanUnits = (unit: IConfig['units']) =>
   unit === 'mgdl' ? UNIT_MGDL : UNIT_MMOL
+
+export interface IParsedData {
+  value: string
+  direction: string
+
+  alert?: IAlert
+}
+
+interface IAlert {
+  type: 'low' | 'high'
+
+  text: string
+  image: string
+}
+
+export const parseData = (data: INightscoutData, config: IConfig) => {
+  const isMmol = config.units === 'mmol'
+  const lowerBound = isMmol ? mgdlToMmol(config.lowValue) : config.lowValue
+  const upperBound = isMmol ? mgdlToMmol(config.highValue) : config.highValue
+
+  const rawUnits = isMmol ? mgdlToMmol(data.sgv) : data.sgv
+  const units = rawUnits.toFixed(0)
+
+  const parsed: IParsedData = {
+    direction: directionArrow(data.direction),
+    value: isMmol ? `${units} ${UNIT_MMOL}` : `${units} ${UNIT_MGDL}`,
+  }
+
+  if (rawUnits <= lowerBound) {
+    parsed.alert = {
+      image: RPC_IMG_LOW,
+      text: RPC_STR_LOW_ALERT,
+      type: 'low',
+    }
+  } else if (rawUnits >= upperBound) {
+    parsed.alert = {
+      image: RPC_IMG_HIGH,
+      text: RPC_STR_HIGH_ALERT,
+      type: 'high',
+    }
+  }
+
+  return parsed
+}
