@@ -9,5 +9,27 @@
     "Jack Baron <jackmbaron@gmail.com> (https://www.jackbaron.com)"
   ],
   "license": "MIT",
-  "private": true
+  "private": true,
+  "scripts": {
+    "test": "yarn run check && yarn run lint",
+    "check": "yarn run build --noEmit",
+    "lint": "tslint -c tslint.json 'src/**/*.ts'",
+    "prebuild": "rimraf build",
+    "build": "tsc",
+    "build:dev": "yarn run build --sourceMap",
+    "watch": "tsc --watch",
+    "dev": "yarn run watch --sourceMap"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.7.8",
+    "prettier": "^1.18.2",
+    "rimraf": "^3.0.0",
+    "tslint": "^5.20.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1",
+    "typescript": "^3.6.3"
+  }
 }
