@@ -17,9 +17,7 @@
     "lint": "tslint -c tslint.json 'src/**/*.ts'",
     "prebuild": "rimraf build",
     "build": "tsc",
-    "build:dev": "yarn run build --sourceMap",
     "watch": "tsc --watch",
-    "dev": "yarn run watch --sourceMap",
     "prepackage": "rimraf dist",
     "package": "pkg . --out-path dist",
     "pkg": "yarn run build && yarn run package"
@@ -28,7 +26,10 @@
     "node": ">=10.0.0"
   },
   "pkg": {
-    "assets": "package.json",
+    "assets": [
+      "package.json",
+      "build/**/*.map"
+    ],
     "out-path": "dist",
     "targets": [
       "node12-windows",

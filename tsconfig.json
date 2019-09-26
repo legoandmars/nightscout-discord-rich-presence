@@ -12,7 +12,8 @@
     "removeComments": true,
     "downlevelIteration": true,
     "outDir": "./build",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "sourceMap": true
   },
   "include": [
     "src/**/*.ts"
