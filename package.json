@@ -34,6 +34,7 @@
     "typescript": "^3.6.3"
   },
   "dependencies": {
+    "source-map-support": "^0.5.13",
     "yaml": "^1.7.0"
   }
 }

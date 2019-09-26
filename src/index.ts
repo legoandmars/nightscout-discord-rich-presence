@@ -1,1 +1,1 @@
-import {} from './config'
+import 'source-map-support/register'
