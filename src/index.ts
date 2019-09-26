@@ -6,9 +6,12 @@ import { loadConfig, saveConfig } from './config'
 import { UNIT_MGDL, UNIT_MMOL } from './constants'
 import log from './log'
 import { fetchInfo, parseData } from './nightscout'
+import { rpcReady, setActivity } from './presence'
 
 // Async Entrypoint
 ;(async () => {
+  await rpcReady
+
   const loadConfigSafe = async () => {
     try {
       const c = await loadConfig()
@@ -76,6 +79,7 @@ import { fetchInfo, parseData } from './nightscout'
   const mainLoop = async () => {
     const data = await fetchInfo(config.siteUrl)
     const parsed = parseData(data, config)
+    setActivity(parsed, config)
 
     console.clear()
     log.info(`Blood Sugar: ${parsed.value} (${parsed.direction})`)
