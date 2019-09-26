@@ -5,6 +5,7 @@ import prompts from 'prompts'
 import { loadConfig, saveConfig } from './config'
 import { UNIT_MGDL, UNIT_MMOL } from './constants'
 import log from './log'
+import { fetchInfo, parseData } from './nightscout'
 
 // Async Entrypoint
 ;(async () => {
@@ -71,4 +72,16 @@ import log from './log'
   }
 
   await saveConfig(config)
+
+  const mainLoop = async () => {
+    const data = await fetchInfo(config.siteUrl)
+    const parsed = parseData(data, config)
+
+    console.clear()
+    log.info(`Blood Sugar: ${parsed.value} (${parsed.direction})`)
+    if (parsed.alert) log.error(parsed.alert.text)
+  }
+
+  mainLoop()
+  setInterval(() => mainLoop(), 1000 * 15)
 })()
