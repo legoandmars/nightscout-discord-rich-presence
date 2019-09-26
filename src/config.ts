@@ -10,7 +10,7 @@ export interface IConfig {
   units: 'mgdl' | 'mmol'
 }
 
-const configPath = join(__dirname, 'config.yaml')
+const configPath = join(process.cwd(), 'config.yaml')
 export const defaultConfig = `# Nightscout Discord Rich Prescense
 
 # Link to your Nightscout site

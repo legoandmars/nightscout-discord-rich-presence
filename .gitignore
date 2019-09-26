@@ -41,3 +41,6 @@ build
 # Environment Variables
 *.env
 !example.env
+
+# Config
+config.yaml
