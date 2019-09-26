@@ -29,29 +29,57 @@ highValue: 180
 units: "mgdl"
 `
 
+const InvalidConfigError = new Error('Invalid config!')
+const validateConfig = (config: IConfig) => {
+  try {
+    if (typeof config.siteUrl !== 'string') return false
+    if (typeof config.displayNightscoutSite !== 'boolean') return false
+    if (typeof config.lowValue !== 'number') return false
+    if (typeof config.highValue !== 'number') return false
+    if (typeof config.units !== 'string') return false
+  } catch (err) {
+    return false
+  }
+
+  return true
+}
+
 let lastConfig: yaml.ast.Document | null = null
 
-export const loadConfig: () => Promise<IConfig> = async () => {
+export const loadConfig: () => Promise<[IConfig, boolean]> = async () => {
+  let isDefault = false
+
   const fileExists = await exists(configPath)
   const getFile = async () => {
-    if (!fileExists) return defaultConfig
+    if (!fileExists) {
+      isDefault = true
+      return defaultConfig
+    }
+
     try {
       return readFile(configPath, 'utf8')
     } catch (err) {
+      isDefault = true
       return defaultConfig
     }
   }
 
   const file = await getFile()
   const document = yaml.parseDocument(file)
-  lastConfig = document
 
   const config: IConfig = document.toJSON()
-  return config
+  const valid = validateConfig(config)
+  if (!valid) throw InvalidConfigError
+
+  lastConfig = document
+  return [config, isDefault]
 }
 
 export const saveConfig = async (config: IConfig) => {
   if (lastConfig === null) throw new Error('Please load config before saving')
+
+  const valid = validateConfig(config)
+  if (!valid) throw InvalidConfigError
 
   // @ts-ignore
   const doc: yaml.ast.Document & Map<string, any> = lastConfig
