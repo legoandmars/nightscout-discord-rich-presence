@@ -23,7 +23,7 @@ displayNightscoutSite: false
 lowValue: 80
 highValue: 180
 
-# Blood sugar display units
+# Blood sugar readout units
 # Valid values are 'mgdl' | 'mmol'
 # Note: The alarm values will still be in mg/dl
 units: "mgdl"

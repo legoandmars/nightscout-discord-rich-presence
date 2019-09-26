@@ -24,6 +24,7 @@
     "node": ">=10.0.0"
   },
   "devDependencies": {
+    "@types/is-url": "^1.2.28",
     "@types/node": "^12.7.8",
     "@types/prompts": "^2.0.1",
     "@types/yaml": "^1.0.2",
@@ -35,6 +36,7 @@
     "typescript": "^3.6.3"
   },
   "dependencies": {
+    "is-url": "^1.2.4",
     "kleur": "^3.0.3",
     "prompts": "^2.2.1",
     "source-map-support": "^0.5.13",

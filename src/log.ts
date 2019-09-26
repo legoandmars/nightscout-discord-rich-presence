@@ -37,3 +37,6 @@ export const error = (msg: string | Error, code?: number) => {
 
   if (typeof code === 'number') process.exit(code)
 }
+
+const log = { info, error }
+export default log
