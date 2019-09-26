@@ -42,5 +42,8 @@ build
 *.env
 !example.env
 
+# Packaged Binaries
+dist
+
 # Config
 config.yaml

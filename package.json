@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "description": "Allows nightscout to display your blood sugar on discord.",
   "main": "build/index.js",
+  "bin": "build/index.js",
   "repository": "git@github.com:legoandmars/nightscout-discord-rich-presence.git",
   "author": "legoandmars/Bobbie",
   "contributors": [
@@ -18,10 +19,22 @@
     "build": "tsc",
     "build:dev": "yarn run build --sourceMap",
     "watch": "tsc --watch",
-    "dev": "yarn run watch --sourceMap"
+    "dev": "yarn run watch --sourceMap",
+    "prepackage": "rimraf dist",
+    "package": "pkg . --out-path dist",
+    "pkg": "yarn run build && yarn run package"
   },
   "engines": {
     "node": ">=10.0.0"
+  },
+  "pkg": {
+    "assets": "package.json",
+    "out-path": "dist",
+    "targets": [
+      "node12-windows",
+      "node12-linux",
+      "node12-macos"
+    ]
   },
   "devDependencies": {
     "@types/discord-rpc": "^3.0.1",
@@ -29,6 +42,7 @@
     "@types/node": "^12.7.8",
     "@types/prompts": "^2.0.1",
     "@types/yaml": "^1.0.2",
+    "pkg": "^4.4.0",
     "prettier": "^1.18.2",
     "rimraf": "^3.0.0",
     "tslint": "^5.20.0",
