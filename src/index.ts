@@ -3,6 +3,7 @@ import 'source-map-support/register'
 import isURL from 'is-url'
 import prompts from 'prompts'
 import { loadConfig, saveConfig } from './config'
+import { UNIT_MGDL, UNIT_MMOL } from './constants'
 import log from './log'
 
 // Async Entrypoint
@@ -52,11 +53,11 @@ import log from './log'
       {
         choices: [
           {
-            title: 'mg/dL',
+            title: UNIT_MGDL,
             value: 'mgdl',
           },
           {
-            title: 'mmol/L',
+            title: UNIT_MMOL,
             value: 'mmol',
           },
         ],
