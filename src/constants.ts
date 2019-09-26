@@ -1,3 +1,10 @@
+// Rich Presence
+export const RPC_CLIENT_ID = '523786960947380245'
+export const RPC_IMG_NIGHTSCOUT_LOGO = 'nightscout-logo'
+export const RPC_IMG_LOW = 'lowimage'
+export const RPC_IMG_HIGH = 'highimage'
+export const RPC_IMG_MY_MAN = 'myman'
+
 // Directional Arrows
 export const ARROW_NONE = ''
 export const ARROW_DOUBLE_UP = '↑↑'
