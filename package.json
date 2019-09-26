@@ -1,0 +1,13 @@
+{
+  "name": "nightscout-discord-rich-presence",
+  "version": "2.0.0",
+  "description": "Allows nightscout to display your blood sugar on discord.",
+  "main": "build/index.js",
+  "repository": "git@github.com:legoandmars/nightscout-discord-rich-presence.git",
+  "author": "legoandmars/Bobbie",
+  "contributors": [
+    "Jack Baron <jackmbaron@gmail.com> (https://www.jackbaron.com)"
+  ],
+  "license": "MIT",
+  "private": true
+}
