@@ -25,11 +25,15 @@
   },
   "devDependencies": {
     "@types/node": "^12.7.8",
+    "@types/yaml": "^1.0.2",
     "prettier": "^1.18.2",
     "rimraf": "^3.0.0",
     "tslint": "^5.20.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.0.1",
     "typescript": "^3.6.3"
+  },
+  "dependencies": {
+    "yaml": "^1.7.0"
   }
 }

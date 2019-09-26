@@ -18,10 +18,22 @@
     esutils "^2.0.2"
     js-tokens "^4.0.0"
 
+"@babel/runtime@^7.5.5":
+  version "7.6.2"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.6.2.tgz#c3d6e41b304ef10dcf13777a33e7694ec4a9a6dd"
+  integrity sha512-EXxN64agfUqqIGeEjI5dL5z0Sw0ZwWo1mLTi4mQowCZ42O59b7DRpZAnTC6OqdF28wMBMFKNb/4uFGrVaigSpg==
+  dependencies:
+    regenerator-runtime "^0.13.2"
+
 "@types/node@^12.7.8":
   version "12.7.8"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.7.8.tgz#cb1bf6800238898bc2ff6ffa5702c3cadd350708"
   integrity sha512-FMdVn84tJJdV+xe+53sYiZS4R5yn1mAIxfj+DVoNiQjTYz1+OYmjwEZr1ev9nU0axXwda0QDbYl06QHanRVH3A==
+
+"@types/yaml@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@types/yaml/-/yaml-1.0.2.tgz#bba080d64714c6ef3eaa023e235dacd2cfa3c938"
+  integrity sha512-rS1VJFjyGKNHk8H97COnPIK+oeLnc0J9G0ES63o/Ky+WlJCeaFGiGCTGhV/GEVKua7ZWIV1JIDopYUwrfvTo7A==
 
 ansi-styles@^3.2.1:
   version "3.2.1"
@@ -218,6 +230,11 @@ prettier@^1.18.2:
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.18.2.tgz#6823e7c5900017b4bd3acf46fe9ac4b4d7bda9ea"
   integrity sha512-OeHeMc0JhFE9idD4ZdtNibzY0+TPHSpSSb9h8FqtP+YnoZZ1sl8Vc9b1sasjfymH3SonAF4QcA2+mzHPhMvIiw==
 
+regenerator-runtime@^0.13.2:
+  version "0.13.3"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.3.tgz#7cf6a77d8f5c6f60eb73c5fc1955b2ceb01e6bf5"
+  integrity sha512-naKIZz2GQ8JWh///G7L3X6LaQUAMp2lvb1rvwwsURe/VXwD6VMfr+/1NuNw3ag8v2kY1aQ/go5SNn79O9JU7yw==
+
 resolve@^1.3.2:
   version "1.12.0"
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.12.0.tgz#3fc644a35c84a48554609ff26ec52b66fa577df6"
@@ -303,3 +320,10 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
+
+yaml@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/yaml/-/yaml-1.7.0.tgz#b4cddb83490051e6c4b6ffe2bb08221c23f4c6cf"
+  integrity sha512-BEXCJKbbJmDzjuG4At0R4nHJKlP81hxoLQqUCaxzqZ8HHgjAlOXbiOHVCQ4YuQqO/rLR8HoQ6kxGkYJ3tlKIsg==
+  dependencies:
+    "@babel/runtime" "^7.5.5"
