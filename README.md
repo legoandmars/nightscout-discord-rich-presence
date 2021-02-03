@@ -18,7 +18,7 @@ Upon load, you'll be prompted to enter:
 
 If you'd like to modify any of these values later, they can be found in the `config.yaml` file automatically generated in the same folder as the program. Either manually edit the file, or delete it to run the config wizard again.
 
-Make sure you have discord open on the same PC. If it's not showing up, double check that Game Activity is enabled in your settings.
+Make sure you have discord open on the same PC. If the rich presence isn't showing up, double check that Game Activity is enabled in your settings.
 ## Development
 This project is built with typescript.
 ### Setup
