@@ -1,8 +1,8 @@
 # Nightscout Discord Rich Presence
 A node project that displays blood sugar values from a Nightscout site on Discord 
 
-![An example of a discord user using rich presence](https://user-images.githubusercontent.com/34404266/106720104-e9bf9700-65b7-11eb-933d-1b33ffd5be53.png)
-![Another example of a discord user using rich presence](https://user-images.githubusercontent.com/34404266/106727755-a4ec2e00-65c0-11eb-8f9d-fe68cad68686.png)
+![An example of a discord user using rich presence](https://user-images.githubusercontent.com/34404266/106729793-bdf5de80-65c2-11eb-94c9-f69df3b53066.png)
+![Another example of a discord user using rich presence](https://user-images.githubusercontent.com/34404266/106730025-fa293f00-65c2-11eb-849b-72c8d3ec5b3e.png)
 
 If you're not sure what Nightscout is, check out [nightscout.info](http://www.nightscout.info/) for more information. 
 I highly recommend setting up a personal Nightscout site if you're diabetic.
