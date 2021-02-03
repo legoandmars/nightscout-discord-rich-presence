@@ -18,7 +18,7 @@ export const setActivity = (data: IParsedData, config: IConfig) => {
   const state = `${data.value} (${data.direction})`
 
   rpc.setActivity({
-    details: config.displayNightscoutSite ? config.siteUrl : RPC_STR_DETAIL,
+    details: config.displayNightscoutSite ? config.siteUrl.replace(/http:\/\/|https:\/\/|\//ig, '') : RPC_STR_DETAIL,
     largeImageKey: RPC_IMG_NIGHTSCOUT_LOGO,
     largeImageText: state,
     smallImageKey: (data.alert && data.alert.image) || undefined,
