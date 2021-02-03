@@ -88,5 +88,5 @@ import { rpcReady, setActivity } from './presence'
   }
 
   mainLoop()
-  setInterval(() => mainLoop(), 1000 * 1)
+  setInterval(() => mainLoop(), 1000 * 15)
 })()
