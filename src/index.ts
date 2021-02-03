@@ -5,7 +5,7 @@ import prompts from 'prompts'
 import { loadConfig, saveConfig } from './config'
 import { UNIT_MGDL, UNIT_MMOL } from './constants'
 import log from './log'
-import { fetchInfo, parseData } from './nightscout'
+import { fetchInfo, INightscoutData, parseData } from './nightscout'
 import { rpcReady, setActivity } from './presence'
 
 // Async Entrypoint
@@ -77,7 +77,8 @@ import { rpcReady, setActivity } from './presence'
   await saveConfig(config)
 
   const mainLoop = async () => {
-    const data = await fetchInfo(config.siteUrl)
+    const data = (await fetchInfo(config.siteUrl)) as INightscoutData
+    if (data == null) return
     const parsed = parseData(data, config)
     setActivity(parsed, config)
 
@@ -87,5 +88,5 @@ import { rpcReady, setActivity } from './presence'
   }
 
   mainLoop()
-  setInterval(() => mainLoop(), 1000 * 15)
+  setInterval(() => mainLoop(), 1000 * 1)
 })()
