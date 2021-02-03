@@ -1,6 +1,6 @@
 {
   "name": "nightscout-discord-rich-presence",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Allows nightscout to display your blood sugar on discord.",
   "main": "build/index.js",
   "bin": "build/index.js",
