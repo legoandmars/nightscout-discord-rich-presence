@@ -4,6 +4,7 @@ import {
   RPC_CLIENT_ID,
   RPC_IMG_NIGHTSCOUT_LOGO,
   RPC_STR_DETAIL,
+  RPC_GITHUB_LINK,
 } from './constants'
 import { IParsedData } from './nightscout'
 
@@ -16,15 +17,22 @@ export const rpcReady = new Promise(resolve => {
 
 export const setActivity = (data: IParsedData, config: IConfig) => {
   const state = `${data.value} (${data.direction})`
+  let buttons: any[] = []
+  if(config.displayNightscoutSite) buttons.push({label: 'More Info', url: config.siteUrl.replace(/http:\/\/|https:\/\/|\//ig, '')})
+  if(config.githubLink) buttons.push({label: 'GitHub Link', url: RPC_GITHUB_LINK})
 
-  rpc.setActivity({
-    details: config.displayNightscoutSite ? config.siteUrl.replace(/http:\/\/|https:\/\/|\//ig, '') : RPC_STR_DETAIL,
+  let presence = {
+    details: RPC_STR_DETAIL,
     largeImageKey: RPC_IMG_NIGHTSCOUT_LOGO,
     largeImageText: state,
     smallImageKey: (data.alert && data.alert.image) || undefined,
     smallImageText: (data.alert && data.alert.text) || undefined,
     state,
-  })
+  }
+  // error checking for this part needs to be ignored because discord-rpc types are not updated
+  // @ts-ignore
+  if(buttons.length > 0) presence.buttons = buttons;
+  rpc.setActivity(presence)
 }
 
 rpc.login({ clientId: RPC_CLIENT_ID })

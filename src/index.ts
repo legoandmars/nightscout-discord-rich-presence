@@ -2,7 +2,7 @@ import 'source-map-support/register'
 
 import isURL from 'is-url'
 import prompts from 'prompts'
-import { loadConfig, saveConfig } from './config'
+import { loadConfig, saveConfig, getDefaultConfig } from './config'
 import { UNIT_MGDL, UNIT_MMOL } from './constants'
 import log from './log'
 import { fetchInfo, INightscoutData, parseData } from './nightscout'
@@ -17,8 +17,17 @@ import { rpcReady, setActivity } from './presence'
       const c = await loadConfig()
       return c
     } catch (err) {
-      log.error('Config is invalid!', 1)
-      return []
+      log.error('Config is invalid!')
+      const results = await prompts([
+        {
+          message: 'Would you like to re-run the setup?', 
+          name: 'rerun', 
+          type: 'toggle',
+          active: 'yes',
+          inactive: 'no',
+        }])
+      if(!results.rerun) process.exit(1)
+      return getDefaultConfig()
     }
   }
 
@@ -32,13 +41,6 @@ import { rpcReady, setActivity } from './presence'
         name: 'siteUrl',
         type: 'text',
         validate: text => isURL(text),
-      },
-      {
-        active: 'yes',
-        inactive: 'no',
-        message: 'Display Site URL on Rich Presence',
-        name: 'displayNightscoutSite',
-        type: 'toggle',
       },
       {
         initial: 80,
@@ -68,6 +70,20 @@ import { rpcReady, setActivity } from './presence'
         message: 'Blood Sugar Readout Units',
         name: 'units',
         type: 'select',
+      },
+      {
+        active: 'yes',
+        inactive: 'no',
+        message: 'Display Nightscout Site URL button on Rich Presence',
+        name: 'displayNightscoutSite',
+        type: 'toggle',
+      },
+      {
+        active: 'yes',
+        inactive: 'no',
+        message: 'Display GitHub Link button on Rich Presence',
+        name: 'githubLink',
+        type: 'toggle',
       },
     ])
 

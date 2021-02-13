@@ -4,10 +4,11 @@ import { exists, readFile, writeFile } from './fs'
 
 export interface IConfig {
   siteUrl: string
-  displayNightscoutSite: boolean
   lowValue: number
   highValue: number
   units: 'mgdl' | 'mmol'
+  displayNightscoutSite: boolean
+  githubLink: boolean
 }
 
 const configPath = join(process.cwd(), 'config.yaml')
@@ -15,9 +16,6 @@ export const defaultConfig = `# Nightscout Discord Rich Prescense
 
 # Link to your Nightscout site
 siteUrl: ""
-
-# Set to true to display your nightscout URL on the rich presence
-displayNightscoutSite: false
 
 # Values to trigger low/high alarm status
 lowValue: 80
@@ -27,16 +25,23 @@ highValue: 180
 # Valid values are 'mgdl' | 'mmol'
 # Note: The alarm values will still be in mg/dl
 units: "mgdl"
+
+# Buttons
+# These show up under the rich presence
+# Enable/Disable these based on how you want it to look
+displayNightscoutSite: false
+githubLink: false
 `
 
 const InvalidConfigError = new Error('Invalid config!')
 const validateConfig = (config: IConfig) => {
   try {
     if (typeof config.siteUrl !== 'string') return false
-    if (typeof config.displayNightscoutSite !== 'boolean') return false
     if (typeof config.lowValue !== 'number') return false
     if (typeof config.highValue !== 'number') return false
     if (typeof config.units !== 'string') return false
+    if (typeof config.displayNightscoutSite !== 'boolean') return false
+    if (typeof config.githubLink !== 'boolean') return false
   } catch (err) {
     return false
   }
@@ -89,4 +94,13 @@ export const saveConfig = async (config: IConfig) => {
 
   const newYaml = doc.toString()
   await writeFile(configPath, newYaml)
+}
+
+export const getDefaultConfig: () => Promise<[IConfig, boolean]> = async () => {
+  const document = yaml.parseDocument(defaultConfig)
+  lastConfig = document;
+
+  const config: IConfig = document.toJSON()
+
+  return [config, true]
 }
