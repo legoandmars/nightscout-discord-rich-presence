@@ -7,7 +7,8 @@ export const RPC_IMG_MY_MAN = 'myman'
 export const RPC_STR_DETAIL = 'Blood Sugar'
 export const RPC_STR_LOW_ALERT = 'LOW GLUCOSE ALERT'
 export const RPC_STR_HIGH_ALERT = 'HIGH GLUCOSE ALERT'
-export const RPC_GITHUB_LINK = 'https://github.com/legoandmars/nightscout-discord-rich-presence'
+export const RPC_GITHUB_LINK =
+  'https://github.com/legoandmars/nightscout-discord-rich-presence'
 
 // Directional Arrows
 export const ARROW_NONE = ''

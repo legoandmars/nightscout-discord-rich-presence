@@ -2,7 +2,7 @@ import 'source-map-support/register'
 
 import isURL from 'is-url'
 import prompts from 'prompts'
-import { loadConfig, saveConfig, getDefaultConfig } from './config'
+import { getDefaultConfig, loadConfig, saveConfig } from './config'
 import { UNIT_MGDL, UNIT_MMOL } from './constants'
 import log from './log'
 import { fetchInfo, INightscoutData, parseData } from './nightscout'
@@ -20,13 +20,14 @@ import { rpcReady, setActivity } from './presence'
       log.error('Config is invalid!')
       const results = await prompts([
         {
-          message: 'Would you like to re-run the setup?', 
-          name: 'rerun', 
-          type: 'toggle',
           active: 'yes',
           inactive: 'no',
-        }])
-      if(!results.rerun) process.exit(1)
+          message: 'Would you like to re-run the setup?',
+          name: 'rerun',
+          type: 'toggle',
+        },
+      ])
+      if (!results.rerun) process.exit(1)
       return getDefaultConfig()
     }
   }

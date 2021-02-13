@@ -98,7 +98,7 @@ export const saveConfig = async (config: IConfig) => {
 
 export const getDefaultConfig: () => Promise<[IConfig, boolean]> = async () => {
   const document = yaml.parseDocument(defaultConfig)
-  lastConfig = document;
+  lastConfig = document
 
   const config: IConfig = document.toJSON()
 
