@@ -52,7 +52,7 @@
     "typescript": "^3.6.3"
   },
   "dependencies": {
-    "axios": "0.21.1",
+    "axios": "0.21.2",
     "discord-rpc": "^3.1.0",
     "is-url": "^1.2.4",
     "kind-of": "6.0.3",
