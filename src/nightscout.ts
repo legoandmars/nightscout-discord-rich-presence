@@ -108,7 +108,7 @@ export const parseData = (data: INightscoutData, config: IConfig) => {
   const upperBound = isMmol ? mgdlToMmol(config.highValue) : config.highValue
 
   const rawUnits = isMmol ? mgdlToMmol(data.sgv) : data.sgv
-  const units = rawUnits.toFixed(0)
+  const units = isMmol ? rawUnits.toFixed(1) : rawUnits.toFixed(0)
 
   const parsed: IParsedData = {
     direction: directionArrow(data.direction),
